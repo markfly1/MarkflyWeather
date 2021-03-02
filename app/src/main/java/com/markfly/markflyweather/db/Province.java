@@ -1,20 +1,8 @@
 package com.markfly.markflyweather.db;
 
-import org.litepal.crud.DataSupport;
-
 //省类
-public class Province extends DataSupport {
+public class Province extends Model {
 
-
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     private String provinceName;
 

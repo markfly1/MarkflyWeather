@@ -1,20 +1,7 @@
 package com.markfly.markflyweather.db;
 
-import org.litepal.crud.DataSupport;
-
 //城市类
-public class City extends DataSupport {
-
-
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+public class City extends Model {
 
     private String cityName;
 

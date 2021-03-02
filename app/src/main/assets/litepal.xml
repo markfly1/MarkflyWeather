@@ -4,9 +4,9 @@
     <version value="1"/>
 
     <list>
-        <mapping class="com.markfly.markflyweather.android.db.Province"/>
-        <mapping class="com.markfly.markflyweather.android.db.City"/>
-        <mapping class="com.markfly.markflyweather.android.db.County"/>
+        <mapping class="com.markfly.markflyweather.db.Province"/>
+        <mapping class="com.markfly.markflyweather.db.City"/>
+        <mapping class="com.markfly.markflyweather.db.County"/>
     </list>
 
 </litepal>

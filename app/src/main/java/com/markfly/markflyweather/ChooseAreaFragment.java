@@ -131,10 +131,11 @@ public class ChooseAreaFragment extends Fragment {
      */
 
     private void queryProvinces() {
-
         titleText.setText("中国");
         backButton.setVisibility(View.GONE);
-//        provinceList = DataSupport.findAll(Province.class);
+        Province p = new Province();
+        Log.d("包名", p.getClass().getPackage().getName());
+        provinceList = DataSupport.findAll(Province.class);
         if (provinceList.size() > 0) {
             dataList.clear();
             for (Province province : provinceList) {
@@ -194,7 +195,6 @@ public class ChooseAreaFragment extends Fragment {
             String address = BASE_ADDRESS + provinceCode + "/" + cityCode;
             queryFromServer(address, "county");
         }
-
     }
 
     /**
@@ -222,14 +222,18 @@ public class ChooseAreaFragment extends Fragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.d("在onresponse","在这里");
                 String responseText = response.body().string();
+                Log.d("结果",responseText);
                 boolean result = false;
                 if ("province".equals(type)) {
+                    Log.d("省",type);
                     result = Utility.handleProvinceResponse(responseText);
+                    Log.d("结果",result+"");
                 } else if ("city".equals(type)) {
+                    Log.d("市",type);
                     result = Utility.handleCityResponse(responseText, selectedProvince.getId());
                 } else if ("county".equals(type)) {
+                    Log.d("县",type);
                     result = Utility.handleCountyResponse(responseText, selectedCity.getId());
                 }
                 if (result) {
