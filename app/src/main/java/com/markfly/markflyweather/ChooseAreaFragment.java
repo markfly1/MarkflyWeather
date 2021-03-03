@@ -1,6 +1,7 @@
 package com.markfly.markflyweather;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -110,6 +111,12 @@ public class ChooseAreaFragment extends Fragment {
                 } else if (currentLevel == LEVEL_CITY) {
                     selectedCity = cityList.get(i);
                     queryCounties();
+                } else if (currentLevel == LEVEL_COUNTY) {
+                    String weatherId = countyList.get(i).getWeatherId();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id", weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
@@ -144,8 +151,7 @@ public class ChooseAreaFragment extends Fragment {
             adapter.notifyDataSetChanged();
             listView.setSelection(0);
             currentLevel = LEVEL_PROVINCE;
-        }
-        else {
+        } else {
             queryFromServer(BASE_ADDRESS, "province");
         }
     }
@@ -223,17 +229,17 @@ public class ChooseAreaFragment extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
-                Log.d("结果",responseText);
+                Log.d("结果", responseText);
                 boolean result = false;
                 if ("province".equals(type)) {
-                    Log.d("省",type);
+                    Log.d("省", type);
                     result = Utility.handleProvinceResponse(responseText);
-                    Log.d("结果",result+"");
+                    Log.d("结果", result + "");
                 } else if ("city".equals(type)) {
-                    Log.d("市",type);
+                    Log.d("市", type);
                     result = Utility.handleCityResponse(responseText, selectedProvince.getId());
                 } else if ("county".equals(type)) {
-                    Log.d("县",type);
+                    Log.d("县", type);
                     result = Utility.handleCountyResponse(responseText, selectedCity.getId());
                 }
                 if (result) {
