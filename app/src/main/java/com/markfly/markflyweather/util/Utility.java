@@ -93,6 +93,7 @@ public class Utility {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
             String weatherContent = jsonArray.getJSONObject(0).toString();
+//            Log.d("返回的内容",weatherContent);
             return new Gson().fromJson(weatherContent, Weather.class);
 
         } catch (Exception e) {
